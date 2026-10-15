@@ -2,10 +2,14 @@
 {
     internal class Program
     {
-        static List<Task> tasks = new List<Task>();
+        static List<TodoItem> tasks = new List<TodoItem>();
+        private static int nextId = 1;// НЕ КАРАРАМЕ потребителя да въвежда
+
 
         static void Main(string[] args)
         {
+
+            
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -59,26 +63,35 @@
             Console.Write("Описание: ");
             string description = Console.ReadLine();
 
+
             DateTime deadline;
 
             //Specific
             while (true)
             {
-                Console.Write("Краен срок (дд.ММ.гггг): ");
+                Console.Write("Краен срок (DD.ММ.YYYY): ");
 
                 if (DateTime.TryParse(Console.ReadLine(), out deadline))
                     break;
 
                 Console.WriteLine("Невалидна дата. Опитайте отново.");
             }
+            try
+            {
+                TodoItem  todoItems= new TodoItem(nextId, title, description, deadline);
+                tasks.Add(todoItems);
+                nextId++;
 
-            Task newTask = new Task(title, description, deadline);
-            tasks.Add(newTask);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Задачатае добавена успешно!");
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nЗадачата беше добавена успешно!");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
+                todoItems.Title = "";
+                todoItems
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Грешка! Трябва да има заглавие!");
+            }
         }
 
         static void ShowTasks()

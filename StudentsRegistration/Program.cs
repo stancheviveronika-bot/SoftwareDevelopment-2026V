@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 
 namespace StudentsRegistration
@@ -8,7 +9,22 @@ namespace StudentsRegistration
         static void Main(string[] args)
 
         {
-            Console.WriteLine("===РЕГИСТАРЦИЯ НА УЧЕНИК===");
+            Console.WriteLine("Начало на програмата");
+            try
+            {
+
+                Console.Write("Въведете число: ");
+                int number = int.Parse(Console.ReadLine());
+
+                Console.WriteLine($"Въведохте: {number}");
+            }
+            catch
+            {
+                Console.WriteLine("Грешка! Трябва да въведете число.");
+            }
+
+            Console.WriteLine("Край на програмата ");
+           
 
             //Име
             Console.WriteLine("Enter name: ");
