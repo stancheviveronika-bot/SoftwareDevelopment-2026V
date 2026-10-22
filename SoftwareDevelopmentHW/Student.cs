@@ -21,7 +21,7 @@ namespace SoftwareDevelopmentHW
             private DateTime birthDate;
 
 
-            public int Id {get; }
+            public int Id { get; private set; }
 
             public string Name
             { 
