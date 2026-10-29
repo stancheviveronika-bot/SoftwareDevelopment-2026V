@@ -14,7 +14,7 @@ namespace TOmanage
         private DateTime dueDate;
         private bool isCompleted;
         
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Title {
             get
             {
@@ -45,6 +45,16 @@ namespace TOmanage
             DeadLine = deadLine;
             IsCompleted = false;
         }
+
+        public void Completed()
+        { 
+            if(IsCompleted)
+                throw new InvalidOperationException(
+                    "Задаата вече е завършена");
+
+            isCompleted = true;
+        }
+
     }
 
 }

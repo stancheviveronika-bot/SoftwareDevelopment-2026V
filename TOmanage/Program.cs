@@ -1,11 +1,11 @@
-﻿namespace TOmanage
+﻿using Microsoft.VisualBasic;
+
+namespace TOmanage
 {
     internal class Program
     {
-        static List<TodoItem> tasks = new List<TodoItem>();
-        private static int nextId = 1;// НЕ КАРАРАМЕ потребителя да въвежда
-
-
+      
+        static TodoService service = new TodoService();
         static void Main(string[] args)
         {
 
@@ -76,22 +76,25 @@
 
                 Console.WriteLine("Невалидна дата. Опитайте отново.");
             }
+
+           
             try
             {
-                TodoItem  todoItems= new TodoItem(nextId, title, description, deadline);
-                tasks.Add(todoItems);
-                nextId++;
+                
+               
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Задачатае добавена успешно!");
 
-                todoItems.Title = "";
-                todoItems
+               
+                
             }
             catch (ArgumentNullException)
             {
                 Console.WriteLine("Грешка! Трябва да има заглавие!");
             }
+
+            service.Add(title, description, dueDate);
         }
 
         static void ShowTasks()
@@ -100,7 +103,9 @@
             Console.WriteLine("===== ВСИЧКИ ЗАДАЧИ =====");
             Console.ForegroundColor = ConsoleColor.White;
 
-            if (tasks.Count == 0)
+            var todos = service.GetAll();
+
+            if (completedTask.Count == 0)
             {
                 Console.WriteLine("Няма въведени задачи.");
                 return;
@@ -127,9 +132,9 @@
             Console.Write("\nВъведете номер на задачата, която да бъде маркикана като изпълнена: ");
             int number = int.Parse(Console.ReadLine());
 
-            if (number >= 1 && number <= tasks.Count)
+            if (number >= 1 && number <= completetasks.Count)
             {
-                tasks[number - 1].IsCompleted = true;
+                Todotasks[number - 1].IsCompleted = true;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Задачата е маркирана като изпълнена!");
                 Console.WriteLine();
